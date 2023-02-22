@@ -1,0 +1,50 @@
+#ifndef __JAMIEXU_CAR_H_
+#define __JAMIEXU_CAR_H_
+#include "stm32f10x.h"
+#include "gpio.h"
+
+#define MOTOR_A_CW MOTOR_A_IN1_PORT->BSRR = MOTOR_A_IN1_PIN; \
+MOTOR_A_IN2_PORT->BRR = MOTOR_A_IN2_PIN;
+
+#define MOTOR_A_CCW MOTOR_A_IN1_PORT->BRR = MOTOR_A_IN1_PIN; \
+MOTOR_A_IN2_PORT->BSRR = MOTOR_A_IN2_PIN
+
+
+#define MOTOR_B_CW MOTOR_B_IN1_PORT->BSRR = MOTOR_B_IN1_PIN; \
+MOTOR_B_IN2_PORT->BRR = MOTOR_B_IN2_PIN
+
+#define MOTOR_B_CCW MOTOR_B_IN1_PORT->BRR = MOTOR_B_IN1_PIN; \
+MOTOR_B_IN2_PORT->BSRR = MOTOR_B_IN2_PIN
+
+
+#define MOTOR_C_CW MOTOR_C_IN1_PORT->BSRR = MOTOR_C_IN1_PIN; \
+MOTOR_C_IN2_PORT->BRR = MOTOR_C_IN2_PIN
+
+#define MOTOR_C_CCW MOTOR_C_IN1_PORT->BRR = MOTOR_C_IN1_PIN \
+MOTOR_C_IN2_PORT->BSRR = MOTOR_C_IN2_PIN
+
+
+#define MOTOR_D_CW MOTOR_D_IN1_PORT->BSRR = MOTOR_D_IN1_PIN; \
+MOTOR_D_IN2_PORT->BRR = MOTOR_D_IN2_PIN
+
+#define MOTOR_D_CCW MOTOR_D_IN1_PORT->BRR = MOTOR_D_IN1_PIN \
+MOTOR_D_IN2_PORT->BSRR = MOTOR_D_IN2_PIN
+
+
+
+void Car_Turn_Left(void);
+
+void Car_Turn_Right(void);
+
+void Car_Move_Forward(void);
+
+void Car_Move_Back(void);
+
+void Car_Move_Left(void);
+
+void Car_Move_Right(void);
+
+void Car_PWM_Set(u32 speed);
+
+
+#endif

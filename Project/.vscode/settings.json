@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "delay.h": "c",
+        "stm32f10x.h": "c",
+        "timer.h": "c",
+        "exti.h": "c",
+        "gpio.h": "c",
+        "nvic.h": "c",
+        "ultrasonicwave.h": "c",
+        "main.h": "c",
+        "usart.h": "c",
+        "car.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
+}
