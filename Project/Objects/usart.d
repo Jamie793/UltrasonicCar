@@ -30,3 +30,8 @@
 .\objects\usart.o: ..\Libraries\FWLIB\inc\stm32f10x_wwdg.h
 .\objects\usart.o: ..\Libraries\FWLIB\inc\misc.h
 .\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart.o: ..\User\Inc\bluetooth.h
+.\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usart.o: ..\User\Inc\car.h
+.\objects\usart.o: ..\User\Inc\gpio.h
+.\objects\usart.o: ..\User\Inc\delay.h

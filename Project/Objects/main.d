@@ -35,6 +35,9 @@
 .\objects\main.o: ..\User\Inc\timer.h
 .\objects\main.o: ..\User\Inc\usart.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: ..\User\Inc\bluetooth.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: ..\User\Inc\car.h
 .\objects\main.o: ..\User\Inc\exti.h
 .\objects\main.o: ..\User\Inc\ultrasonicwave.h
 .\objects\main.o: ..\User\Inc\main.h

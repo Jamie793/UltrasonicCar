@@ -36,6 +36,9 @@
 .\objects\stm32f10x_it.o: ..\User\Inc\timer.h
 .\objects\stm32f10x_it.o: ..\User\Inc\usart.h
 .\objects\stm32f10x_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\stm32f10x_it.o: ..\User\Inc\bluetooth.h
+.\objects\stm32f10x_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\stm32f10x_it.o: ..\User\Inc\car.h
 .\objects\stm32f10x_it.o: ..\User\Inc\exti.h
 .\objects\stm32f10x_it.o: ..\User\Inc\ultrasonicwave.h
 .\objects\stm32f10x_it.o: ..\User\Inc\main.h

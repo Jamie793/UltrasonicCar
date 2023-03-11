@@ -9,7 +9,10 @@
         "ultrasonicwave.h": "c",
         "main.h": "c",
         "usart.h": "c",
-        "car.h": "c"
+        "car.h": "c",
+        "bluetooth.h": "c",
+        "dma.h": "c",
+        "pid.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }
