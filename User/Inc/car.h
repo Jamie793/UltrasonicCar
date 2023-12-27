@@ -30,7 +30,17 @@ MOTOR_D_IN2_PORT->BRR = MOTOR_D_IN2_PIN
 #define MOTOR_D_CCW MOTOR_D_IN1_PORT->BRR = MOTOR_D_IN1_PIN; \
 MOTOR_D_IN2_PORT->BSRR = MOTOR_D_IN2_PIN
 
+#define MOTOR_A_STBY_L MOTOR_A_STBY_PORT->BRR = MOTOR_A_STBY_PIN
+#define MOTOR_A_STBY_H MOTOR_A_STBY_PORT->BSRR = MOTOR_A_STBY_PIN
 
+#define MOTOR_B_STBY_L MOTOR_B_STBY_PORT->BRR = MOTOR_B_STBY_PIN
+#define MOTOR_B_STBY_H MOTOR_B_STBY_PORT->BSRR = MOTOR_B_STBY_PIN
+
+
+extern u32 Motor_Encoder[4];
+
+
+void Car_Init(void);
 
 void Car_Turn_Left(void);
 
@@ -38,13 +48,15 @@ void Car_Turn_Right(void);
 
 void Car_Move_Forward(void);
 
-void Car_Move_Back(void);
+void Car_Move_Backward(void);
 
 void Car_Move_Left(void);
 
 void Car_Move_Right(void);
 
 void Car_PWM_Set(u32 speed);
+
+void Car_Encoder_Init(void);
 
 
 #endif

@@ -24,7 +24,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "main.h"
+#include "string.h"
 #include "ultrasonicwave.h"
+#include "bluetooth.h"
+#include "car.h"
+#include "pid.h"
 /** @addtogroup STM32F10x_StdPeriph_Template
  * @{
  */
@@ -157,15 +161,36 @@ void SysTick_Handler(void)
  * @}
  */
 
+u32 time = 0;
 void TIM2_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
     {
-        distance++;
+        // distance++;
         TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+        if (++time >= 20)
+        {
+            pid_actual[0] = (pid_actual[0] / 20.0) * (60000 / 20);
+            // pid_actual[1] = pid_actual[1] / 20.0;
+            // pid_actual[2] = pid_actual[2] / 20.0;
+            // pid_actual[3] = pid_actual[3] / 20.0;
+            // printf("Motor Speed A: %d RPM\nMotor Speed B: %d RPM\nMotor Speed C: %d RPM\nMotor Speed D: %d RPM\nSpeed: %.2fm/s\n\n",
+            //        (u32)pid_actual[0],
+            //        (u32)pid_actual[1],
+            //        (u32)pid_actual[2],
+            //        (u32)pid_actual[3],
+            //        pid_actual[0] / 60 * 2 * 3.14 * 0.048);
+            PIDDebug_Set_Actual(1, (u32)pid_actual[0]);
+            // PIDDebug_Set_Target(1, 100);
+            PIDCar_Speed_A(100);
+            pid_actual[0] = 0;
+            pid_actual[1] = 0;
+            pid_actual[2] = 0;
+            pid_actual[3] = 0;
+            time = 0;
+        }
     }
 }
-
 
 void EXTI0_IRQHandler(void)
 {
@@ -173,7 +198,8 @@ void EXTI0_IRQHandler(void)
     {
         TIM_SetCounter(TIM2, 0);
         TIM_Cmd(TIM2, ENABLE);
-        while(ECHO_READ);
+        while (ECHO_READ)
+            ;
         TIM_Cmd(TIM2, DISABLE);
         distance = TIM_GetCounter(TIM2) * 1e-6;
         ok_bit = 0;
@@ -181,4 +207,86 @@ void EXTI0_IRQHandler(void)
     }
 }
 
+void USART1_IRQHandler(void)
+{
+    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+    {
+        USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+
+        u16 data = USART_ReceiveData(USART1);
+        // USART_SendData(USART1, data);
+        cmdData[pos++] = data;
+        // if (cmdData[pos - 2] == 0x05 && cmdData[pos - 1] == 0x02)
+        // {
+        //     pos = 2;
+        //     memset(cmdData + 2, 0, 255);
+        // }
+        // else if (cmdData[pos - 2] == 0x05 && cmdData[pos - 1] == 0x04)
+        // {
+        //     Bluetooth_Proc();
+        // }
+        if (cmdData[0] == 0x53 && cmdData[1] == 0x5A && cmdData[2] == 0x48 && cmdData[3] == 0x59 && pos >= 0x17)
+        {
+            PIDDebug_Proc(cmdData);
+            pos = 0;
+        }
+    }
+}
+
+void DMA1_Channel5_IRQHandler(void)
+{
+    if (DMA_GetITStatus(DMA1_IT_TC5) != RESET)
+    {
+        // pos = MAX_RECEIVE_SIZE - DMA_GetCurrDataCounter(DMA1_Channel5);
+        // if (cmdData[pos - 2] == 0x05 && cmdData[pos - 1] == 0x02)
+        // {
+        //     DMA_Cmd(DMA1_Channel5, DISABLE);
+        //     DMA_SetCurrDataCounter(DMA1_Channel5, MAX_RECEIVE_SIZE);
+        //     DMA_Cmd(DMA1_Channel5, ENABLE);
+        //     memset(cmdData, 0, 255);
+        // }
+        // else if (cmdData[pos - 2] == 0x05 && cmdData[pos - 1] == 0x04)
+        // {
+        //     dataSize = 0;
+        //     dataSize |= cmdData[4];
+        //     dataSize |= cmdData[3] << 8;
+        //     printf("size: %d", dataSize);
+        // }
+        // if (cmdData[0] == 0x05 && cmdData[1] == 0x02)
+        // {
+        DMA_Cmd(DMA1_Channel5, DISABLE);
+        DMA_SetCurrDataCounter(DMA1_Channel5, MAX_RECEIVE_SIZE);
+        DMA_Cmd(DMA1_Channel5, ENABLE);
+        // }
+        DMA_ClearITPendingBit(DMA1_IT_TC5);
+    }
+}
+
+void EXTI9_5_IRQHandler(void)
+{
+
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line5);
+        pid_actual[0]++;
+    }
+
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line6);
+        pid_actual[1]++;
+    }
+
+    if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line7);
+        pid_actual[2]++;
+    }
+
+    if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line8);
+        pid_actual[3]++;
+    }
+}
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

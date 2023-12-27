@@ -6,5 +6,6 @@ void EXTIx_Init(void);
 
 void EXTILine0_Init(void);
 
+void EXTILine5_9_Init(void);
 
 #endif

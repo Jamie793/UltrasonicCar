@@ -39,5 +39,6 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: ..\User\Inc\car.h
 .\objects\main.o: ..\User\Inc\exti.h
+.\objects\main.o: ..\User\Inc\pid.h
 .\objects\main.o: ..\User\Inc\ultrasonicwave.h
 .\objects\main.o: ..\User\Inc\main.h

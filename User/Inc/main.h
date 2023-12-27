@@ -7,6 +7,8 @@
 #include "timer.h"
 #include "usart.h"
 #include "exti.h"
+#include "car.h"
+#include "pid.h"
 #include "ultrasonicwave.h"
 
 #define KEY_LT_READ GPIO_ReadInputDataBit(KEY_LT_PORT, KEY_LT_PIN)

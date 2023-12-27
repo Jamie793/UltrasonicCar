@@ -40,4 +40,5 @@
 .\objects\ultrasonicwave.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\ultrasonicwave.o: ..\User\Inc\car.h
 .\objects\ultrasonicwave.o: ..\User\Inc\exti.h
+.\objects\ultrasonicwave.o: ..\User\Inc\pid.h
 .\objects\ultrasonicwave.o: ..\User\Inc\ultrasonicwave.h

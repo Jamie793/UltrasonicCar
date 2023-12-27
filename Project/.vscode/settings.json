@@ -12,7 +12,9 @@
         "car.h": "c",
         "bluetooth.h": "c",
         "dma.h": "c",
-        "pid.h": "c"
+        "pid.h": "c",
+        "stm32f10x_rcc.h": "c",
+        "stm32f10x_gpio.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

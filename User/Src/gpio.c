@@ -5,10 +5,8 @@ void GPIOx_Init(void)
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
 
     LED_GPIO_Init();
     KEY_GPIO_Init();
@@ -17,6 +15,7 @@ void GPIOx_Init(void)
     HC_SR04_GPIO_Init();
     USART1_GPIO_Init();
     MOTOR_GPIO_Init();
+    MOTOR_ENCODER_GPIO_Init();
 }
 
 void LED_GPIO_Init(void)
@@ -94,7 +93,7 @@ void USART1_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(USART1_PORT, &GPIO_InitStructure);
 
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_InitStructure.GPIO_Pin = USART1_RX_PIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(USART1_PORT, &GPIO_InitStructure);
@@ -119,7 +118,6 @@ void MOTOR_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(MOTOR_A_PWM_PORT, &GPIO_InitStructure);
 
-
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Pin = MOTOR_B_IN1_PIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -134,7 +132,6 @@ void MOTOR_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Pin = MOTOR_B_PWM_PIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(MOTOR_B_PWM_PORT, &GPIO_InitStructure);
-
 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Pin = MOTOR_C_IN1_PIN;
@@ -151,7 +148,6 @@ void MOTOR_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(MOTOR_C_PWM_PORT, &GPIO_InitStructure);
 
-
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Pin = MOTOR_D_IN1_PIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -167,5 +163,29 @@ void MOTOR_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(MOTOR_D_PWM_PORT, &GPIO_InitStructure);
 
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Pin = MOTOR_A_STBY_PIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(MOTOR_A_STBY_PORT, &GPIO_InitStructure);
 
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Pin = MOTOR_B_STBY_PIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(MOTOR_B_STBY_PORT, &GPIO_InitStructure);
+
+    // GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
+}
+
+void MOTOR_ENCODER_GPIO_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStr;
+    GPIO_InitStr.GPIO_Mode = GPIO_Mode_IPD;
+    GPIO_InitStr.GPIO_Pin = MOTOR_ENCODER_A_PIN | MOTOR_ENCODER_B_PIN | MOTOR_ENCODER_C_PIN | MOTOR_ENCODER_D_PIN;
+    GPIO_InitStr.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(MOTOR_ENCODER_PORT, &GPIO_InitStr);
+
+    GPIO_EXTILineConfig(MOTOR_ENCODER_PORTSOURCE, MOTOR_ENCODER_A_PINSOURCE);
+    GPIO_EXTILineConfig(MOTOR_ENCODER_PORTSOURCE, MOTOR_ENCODER_B_PINSOURCE);
+    GPIO_EXTILineConfig(MOTOR_ENCODER_PORTSOURCE, MOTOR_ENCODER_C_PINSOURCE);
+    GPIO_EXTILineConfig(MOTOR_ENCODER_PORTSOURCE, MOTOR_ENCODER_D_PINSOURCE);
 }

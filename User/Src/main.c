@@ -1,6 +1,6 @@
 #include "main.h"
 
-extern u8 ok_bit = 0;
+u8 ok_bit = 0;
 
 void Key_Scan(void)
 {
@@ -58,24 +58,31 @@ int main(void)
 {
     GPIOx_Init();
     SysTick_Init();
-    USARTx_Init();
     NVICx_Init();
+    USARTx_Init();
     TIMx_Init();
     EXTIx_Init();
+    Car_Init();
 
-    printf("Running...\n");
+    // printf("Running...\n");
+    PIDCar_Init();
+    Car_Move_Forward();
+    Car_PWM_Set(1000);
     while (1)
     {
-        Key_Scan();
+        // printf("Current speed: A: %d, B: %d, C: %d, D: %d\n", Motor_Encoder[0], Motor_Encoder[1], Motor_Encoder[2], Motor_Encoder[3]);
+        // SysTick_Delay_Ms(1000);
+        // printf("%d\n", TIM_GetCounter(TIM5));
+        // Key_Scan();
         // LDR_Scan();
-        if (Ultrasonic_Read() <= 10)
-        {
-            LED_RED_ON;
-            bell();
-        }
-        else
-        {
-            LED_RED_OFF;
-        }
+        // if (Ultrasonic_Read() <= 10)
+        // {
+        //     LED_RED_ON;
+        //     bell();
+        // }
+        // else
+        // {
+        //     LED_RED_OFF;
+        // }
     }
 }

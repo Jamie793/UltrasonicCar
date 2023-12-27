@@ -8,5 +8,9 @@ void NVIC_Timer2(void);
 
 void NVIC_EXTILine0(void);
 
+void NVIC_USART1(void);
+
+void NVIC_EXTILine5_9(void);
+
 
 #endif

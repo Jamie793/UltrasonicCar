@@ -29,3 +29,5 @@
 .\objects\pid.o: ..\Libraries\FWLIB\inc\stm32f10x_usart.h
 .\objects\pid.o: ..\Libraries\FWLIB\inc\stm32f10x_wwdg.h
 .\objects\pid.o: ..\Libraries\FWLIB\inc\misc.h
+.\objects\pid.o: ..\User\Inc\car.h
+.\objects\pid.o: ..\User\Inc\gpio.h

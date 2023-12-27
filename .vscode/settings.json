@@ -1,5 +1,18 @@
 {
     "files.associations": {
-        "delay.h": "c"
+        "delay.h": "c",
+        "timer.h": "c",
+        "gpio.h": "c",
+        "stm32f10x.h": "c",
+        "main.h": "c",
+        "core_cm3.h": "c",
+        "car.h": "c",
+        "nvic.h": "c",
+        "usart.h": "c",
+        "exti.h": "c",
+        "bluetooth.h": "c",
+        "ultrasonicwave.h": "c",
+        "protocol.h": "c",
+        "pid.h": "c"
     }
 }
