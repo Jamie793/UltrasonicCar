@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:padding="20dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接小车"
+            android:id="@+id/btn_connect"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jamiexu" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/joystick_left"
+                android:layout_width="1000px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                custom:JV_backgroundColor="#32FFFFFF"
+                custom:JV_borderColor="#0000796B"
+                custom:JV_borderWidth="4dp"
+                custom:JV_buttonColor="#4FAFABAA"
+                custom:JV_buttonSizeRatio="15%"
+                custom:JV_fixedCenter="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/joystick_right"
+                android:layout_width="1000px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                custom:JV_backgroundColor="#32FFFFFF"
+                custom:JV_borderColor="#0000796B"
+                custom:JV_borderWidth="4dp"
+                custom:JV_buttonColor="#4FAFABAA"
+                custom:JV_buttonSizeRatio="15%"
+                custom:JV_fixedCenter="false" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
